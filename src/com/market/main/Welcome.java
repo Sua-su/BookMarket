@@ -3,13 +3,10 @@ package com.market.main;
 import java.text.SimpleDateFormat;
 
 import java.util.Date;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.util.Scanner;
 import com.market.bookitem.Book;
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.nio.Buffer;
 import java.io.FileWriter;
 import com.market.cart.Cart;
 import com.market.member.Admin;
@@ -70,7 +67,7 @@ public class Welcome {
                     case 4: 
                     	mTotalBook = totalFileToBookList();
                     	mBookList = new Book[mTotalBook];
-                    	menuCartAddItem(mBookList, input); break;
+                    	menuCartAddItem(mBookList); break;
                     case 5: menuCartRemoveItemCount(); break;
                     case 6: menuCartRemoveItem(); break;
                     case 7: menuCartBill(); break;
@@ -107,7 +104,7 @@ public class Welcome {
     		fr.close();
     		return num;
     	}catch (Exception e) {
-    		System.out.print(e);
+    		System.out.println(e);
     	}
     	return 0;
     }
@@ -121,6 +118,9 @@ public class Welcome {
     		int count = 0;
     		
     		while ((str2 = reader.readLine()) != null) {
+    	
+    			
+    			
     			if (str2.contains("ISBN")) {
     				readBook[0] = str2;
     				readBook[1]	= reader.readLine();
@@ -129,17 +129,22 @@ public class Welcome {
     				readBook[4]	= reader.readLine();
     				readBook[5]	= reader.readLine();
     				readBook[6]	= reader.readLine();
+    				
 
     				}
     			booklist[count++] = new Book(readBook[0],readBook[1],Integer.parseInt(readBook[2]),
     					readBook[3], readBook[4], readBook[5],readBook[6]);
     			}
-    		reader.close();
-    		fr.close();
-    		}catch(Exception e ) {
-    			System.out.println(e);
+    			
+    			
+    		
+    			reader.close();
+    			fr.close();
+    			}catch(Exception e ) {
+    				System.out.println(e);
     	}
     }
+
 
     public static void menuIntroduction() {
         System.out.println("1.고객 정보 확인하기 \t4. 바구니 항목 추가하기");
@@ -451,7 +456,7 @@ public class Welcome {
             				fw.close();
             				System.out.println("새 도서 정보 저장되었습니다.");
             		}catch (Exception e) {
-            			System.out.print(e);
+            			System.out.println(e);
             		}
             	}else {
             		System.out.println("이름" +admin.getName() + "연락처"+admin.getPhone());
